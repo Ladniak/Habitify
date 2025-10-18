@@ -86,6 +86,13 @@ export default function TaskDetails() {
                 title={task.completed ? "Mark as Incomplete" : "Mark as Done"}
                 onPress={toggleStatus}
             />
+            <Button
+                title="Edit"
+                onPress={() => router.push({ pathname: "/edit/[id]", params: { id: task.id } })}
+                color={colors.primary}
+            />
+
+
             <Button title="Delete" onPress={handleDelete} color={colors.danger} />
         </View>
     );

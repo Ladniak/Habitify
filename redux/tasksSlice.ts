@@ -125,6 +125,16 @@ export const deleteTask = createAsyncThunk(
   }
 );
 
+export const updateTask = createAsyncThunk(
+  "tasks/updateTask",
+  async (task: Partial<Task> & { id: string }) => {
+    const { id, ...updates } = task;
+    const ref = doc(db, "tasks", id);
+    await updateDoc(ref, updates);
+    return { id, ...updates };
+  }
+);
+
 const tasksSlice = createSlice({
   name: "tasks",
   initialState,
@@ -158,6 +168,15 @@ const tasksSlice = createSlice({
         state.tasks = state.tasks.filter((t) => t.id !== action.payload);
         if (state.selectedTask?.id === action.payload)
           state.selectedTask = null;
+      })
+      .addCase(updateTask.fulfilled, (state, action) => {
+        const index = state.tasks.findIndex((t) => t.id === action.payload.id);
+        if (index !== -1) {
+          state.tasks[index] = { ...state.tasks[index], ...action.payload };
+        }
+        if (state.selectedTask?.id === action.payload.id) {
+          state.selectedTask = { ...state.selectedTask, ...action.payload };
+        }
       });
   },
 });

@@ -28,6 +28,7 @@ function InnerLayout() {
       >
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
         <Stack.Screen name="details/[id]" options={{ title: "Task Details" }} />
+        <Stack.Screen name="edit/[id]" options={{ title: "Edit" }} />
       </Stack>
       <StatusBar style="auto" />
     </>
