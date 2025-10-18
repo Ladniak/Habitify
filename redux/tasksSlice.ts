@@ -20,6 +20,14 @@ interface Task {
   createdAt?: number | null;
 }
 
+export interface TaskInput {
+  title: string;
+  description?: string;
+  category?: string;
+  priority?: "low" | "medium" | "high";
+  dueDate?: number | null;
+}
+
 interface TasksState {
   tasks: Task[];
   loading: boolean;
@@ -66,19 +74,25 @@ export const fetchTaskById = createAsyncThunk(
 
 export const addTask = createAsyncThunk(
   "tasks/addTask",
-  async (title: string) => {
+  async (taskInput: TaskInput) => {
     const docRef = await addDoc(collection(db, "tasks"), {
-      title,
+      ...taskInput,
       completed: false,
       createdAt: serverTimestamp(),
+      updatedAt: serverTimestamp(),
     });
     const newDoc = await getDoc(docRef);
     const data = newDoc.data();
     return {
       id: newDoc.id,
       title: data?.title || "",
-      completed: data?.completed,
+      description: data?.description || "",
+      category: data?.category || "",
+      priority: data?.priority || "medium",
+      dueDate: data?.dueDate?.toMillis() || null,
+      completed: data?.completed || false,
       createdAt: data?.createdAt?.toMillis() || null,
+      updatedAt: data?.updatedAt?.toMillis() || null,
     } as Task;
   }
 );
