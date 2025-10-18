@@ -13,7 +13,15 @@ export default function TabLayout() {
       screenOptions={{
         tabBarActiveTintColor: colors.primary,
         tabBarStyle: { backgroundColor: colors.card, borderTopColor: colors.border },
-        headerStyle: { backgroundColor: colors.background },
+        headerStyle: {
+          backgroundColor: colors.background,
+          shadowOpacity: 0,
+          elevation: 0,
+        },
+        headerTitleStyle: {
+          marginBottom: 0,
+          marginTop: 0,
+        },
         headerTintColor: colors.text,
         tabBarButton: HapticTab,
       }}
@@ -26,7 +34,7 @@ export default function TabLayout() {
             <IconSymbol size={26} name="list.bullet.rectangle.fill" color={color} />
           ),
           headerRight: () => (
-            <Pressable onPress={toggleTheme} style={{ marginRight: 16 }}>
+            <Pressable onPress={toggleTheme} style={{ marginRight: 8 }}>
               {theme === "light" ? (
                 <IconSymbol size={26} name="moon.fill" color={colors.text} />
               ) : (

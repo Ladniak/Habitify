@@ -29,6 +29,13 @@ export default function CreateTask() {
             await dispatch(
                 addTask({ title, description, category, priority, dueDate })
             ).unwrap();
+
+            setTitle("");
+            setDescription("");
+            setCategory("Work");
+            setPriority("medium");
+            setDueDate(null);
+
             router.back();
         } catch (error) {
             console.log(error);

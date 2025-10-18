@@ -13,11 +13,16 @@ import {
   query,
 } from "firebase/firestore";
 
-interface Task {
+export interface Task {
   id: string;
   title: string;
+  description?: string;
+  category?: string;
+  priority?: "low" | "medium" | "high";
+  dueDate?: number | null;
   completed: boolean;
   createdAt?: number | null;
+  updatedAt?: number | null;
 }
 
 export interface TaskInput {
@@ -59,15 +64,19 @@ export const fetchTasks = createAsyncThunk("tasks/fetchTasks", async () => {
 export const fetchTaskById = createAsyncThunk(
   "tasks/fetchTaskById",
   async (id: string) => {
-    const ref = doc(db, "tasks", id);
-    const snap = await getDoc(ref);
+    const snap = await getDoc(doc(db, "tasks", id));
     if (!snap.exists()) throw new Error("Task not found");
     const data = snap.data();
     return {
       id: snap.id,
-      title: data.title,
-      completed: data.completed,
-      createdAt: data.createdAt?.toMillis() || null,
+      title: data?.title || "",
+      description: data?.description || "",
+      category: data?.category || "",
+      priority: data?.priority || "medium",
+      dueDate: data?.dueDate?.toMillis() || null,
+      completed: data?.completed || false,
+      createdAt: data?.createdAt?.toMillis() || null,
+      updatedAt: data?.updatedAt?.toMillis() || null,
     } as Task;
   }
 );
