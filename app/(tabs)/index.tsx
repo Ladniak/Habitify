@@ -7,7 +7,27 @@ import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
 import { Link } from 'expo-router';
 
+import { db } from "../../firebase/config";
+import { collection, addDoc } from "firebase/firestore";
+import { useEffect } from 'react';
+
 export default function HomeScreen() {
+  useEffect(() => {
+    const addTask = async () => {
+      try {
+        await addDoc(collection(db, "tasks"), {
+          title: "First Firebase Task",
+          completed: false,
+          createdAt: new Date().toISOString(),
+        });
+        console.log("✅ Task added!");
+      } catch (error) {
+        console.error("❌ Error adding task:", error);
+      }
+    };
+
+    addTask();
+  }, []);
   return (
     <ParallaxScrollView
       headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
