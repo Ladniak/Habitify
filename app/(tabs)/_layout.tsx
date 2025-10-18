@@ -1,33 +1,49 @@
-import { Tabs } from 'expo-router';
-import React from 'react';
-
-import { HapticTab } from '@/components/haptic-tab';
-import { IconSymbol } from '@/components/ui/icon-symbol';
-import { Colors } from '@/constants/theme';
-import { useColorScheme } from '@/hooks/use-color-scheme';
+import { Tabs } from "expo-router";
+import React from "react";
+import { Pressable, Text } from "react-native";
+import { HapticTab } from "@/components/haptic-tab";
+import { IconSymbol } from "@/components/ui/icon-symbol";
+import { useTheme } from "../theme/themes";
 
 export default function TabLayout() {
-  const colorScheme = useColorScheme();
+  const { colors, toggleTheme, theme } = useTheme();
 
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
-        headerShown: false,
+        tabBarActiveTintColor: colors.primary,
+        tabBarStyle: { backgroundColor: colors.card, borderTopColor: colors.border },
+        headerStyle: { backgroundColor: colors.background },
+        headerTintColor: colors.text,
         tabBarButton: HapticTab,
-      }}>
+      }}
+    >
       <Tabs.Screen
         name="index"
         options={{
-          title: 'Home',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="house.fill" color={color} />,
+          title: "My Tasks",
+          tabBarIcon: ({ color }) => (
+            <IconSymbol size={26} name="house.fill" color={color} />
+          ),
+          headerRight: () => (
+            <Pressable
+              onPress={toggleTheme}
+              style={{ marginRight: 16 }}
+            >
+              <Text style={{ color: colors.primary }}>
+                {theme === "light" ? "🌙" : "☀️"}
+              </Text>
+            </Pressable>
+          ),
         }}
       />
       <Tabs.Screen
-        name="explore"
+        name="create"
         options={{
-          title: 'Explore',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="paperplane.fill" color={color} />,
+          title: "Create Task",
+          tabBarIcon: ({ color }) => (
+            <IconSymbol size={26} name="plus.circle.fill" color={color} />
+          ),
         }}
       />
     </Tabs>
