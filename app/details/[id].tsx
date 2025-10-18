@@ -1,56 +1,64 @@
 import { useLocalSearchParams, useRouter } from "expo-router";
-import { deleteDoc, doc, getDoc, updateDoc } from "firebase/firestore";
-import { useEffect, useState } from "react";
 import { Alert, StyleSheet, Text, View } from "react-native";
-import { db } from "../../firebase/config";
-import Button from "../components/Button";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useTheme } from "../theme/themes";
+import { IconSymbol } from "@/components/ui/icon-symbol";
+import Button from "../components/Button";
+import { fetchTaskById, toggleTaskStatus, deleteTask } from "@/redux/tasksSlice";
+import { RootState, AppDispatch } from "@/redux/store";
 
 export default function TaskDetails() {
-    const { colors } = useTheme();
     const { id } = useLocalSearchParams();
+    const { colors } = useTheme();
     const router = useRouter();
-    const [task, setTask] = useState<any>(null);
+    const dispatch = useDispatch<AppDispatch>();
+    const { selectedTask: task, loading } = useSelector((state: RootState) => state.tasks);
 
     useEffect(() => {
-        const fetchTask = async () => {
-            const docRef = doc(db, "tasks", id as string);
-            const snap = await getDoc(docRef);
-            if (snap.exists()) setTask({ id: snap.id, ...snap.data() });
-        };
-        fetchTask();
+        if (id) dispatch(fetchTaskById(id as string));
     }, [id]);
 
     const toggleStatus = async () => {
         if (!task) return;
-        await updateDoc(doc(db, "tasks", task.id), { completed: !task.completed });
-        setTask({ ...task, completed: !task.completed });
+        await dispatch(toggleTaskStatus(task));
     };
 
     const handleDelete = async () => {
+        if (!task) return;
         Alert.alert("Delete Task", "Are you sure?", [
             { text: "Cancel" },
             {
                 text: "Delete",
                 style: "destructive",
                 onPress: async () => {
-                    await deleteDoc(doc(db, "tasks", task.id));
+                    await dispatch(deleteTask(task.id));
                     router.back();
                 },
             },
         ]);
     };
 
-    if (!task) return <Text>Loading...</Text>;
+    if (loading || !task)
+        return <Text style={{ color: colors.text, padding: 20 }}>Loading...</Text>;
 
     return (
         <View style={[styles.container, { backgroundColor: colors.background }]}>
             <Text style={[styles.title, { color: colors.text }]}>{task.title}</Text>
-            <Text style={{ color: colors.subtext, marginBottom: 20 }}>
-                Status: {task.completed ? "✅ Done" : "🕓 In Progress"}
-            </Text>
 
-            <Button title={task.completed ? "Mark as Incomplete" : "Mark as Done"} onPress={toggleStatus} />
+            <View style={{ flexDirection: "row", alignItems: "center", marginBottom: 20, gap: 8 }}>
+                <Text style={{ color: colors.subtext, fontSize: 16 }}>Status:</Text>
+                {task.completed ? (
+                    <IconSymbol size={26} name="checkmark.circle.fill" color={colors.text} />
+                ) : (
+                    <IconSymbol size={26} name="speedometer" color={colors.text} />
+                )}
+            </View>
+
+            <Button
+                title={task.completed ? "Mark as Incomplete" : "Mark as Done"}
+                onPress={toggleStatus}
+            />
             <Button title="Delete" onPress={handleDelete} color={colors.danger} />
         </View>
     );

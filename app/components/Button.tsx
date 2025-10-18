@@ -1,7 +1,9 @@
 import { Pressable, StyleSheet, Text } from "react-native";
 import { useTheme } from "../theme/themes";
+import { View } from "react-native";
+import { IconSymbol } from "@/components/ui/icon-symbol";
 
-export default function Button({ title, onPress, color }: { title: string; onPress: () => void; color?: string }) {
+export default function Button({ title, icon, onPress, color }: { title: string; icon?: string; onPress: () => void; color?: string }) {
     const { colors } = useTheme();
 
     return (
@@ -12,7 +14,12 @@ export default function Button({ title, onPress, color }: { title: string; onPre
             ]}
             onPress={onPress}
         >
-            <Text style={[styles.text, { color: "#fff" }]}>{title}</Text>
+
+            <View style={{ alignItems: 'center', flexDirection: 'row', gap: 10 }}>
+                <Text style={[styles.text, { color: "#fff" }]}>{title}</Text>
+                {icon && <IconSymbol size={26} name={icon as any} color="#fff" />}
+            </View>
+
         </Pressable>
     );
 }

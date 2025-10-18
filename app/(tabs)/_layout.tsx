@@ -1,6 +1,6 @@
 import { Tabs } from "expo-router";
 import React from "react";
-import { Pressable, Text } from "react-native";
+import { Pressable } from "react-native";
 import { HapticTab } from "@/components/haptic-tab";
 import { IconSymbol } from "@/components/ui/icon-symbol";
 import { useTheme } from "../theme/themes";
@@ -23,16 +23,15 @@ export default function TabLayout() {
         options={{
           title: "My Tasks",
           tabBarIcon: ({ color }) => (
-            <IconSymbol size={26} name="house.fill" color={color} />
+            <IconSymbol size={26} name="list.bullet.rectangle.fill" color={color} />
           ),
           headerRight: () => (
-            <Pressable
-              onPress={toggleTheme}
-              style={{ marginRight: 16 }}
-            >
-              <Text style={{ color: colors.primary }}>
-                {theme === "light" ? "🌙" : "☀️"}
-              </Text>
+            <Pressable onPress={toggleTheme} style={{ marginRight: 16 }}>
+              {theme === "light" ? (
+                <IconSymbol size={26} name="moon.fill" color={colors.text} />
+              ) : (
+                <IconSymbol size={26} name="sun.max.fill" color={colors.text} />
+              )}
             </Pressable>
           ),
         }}
@@ -42,10 +41,20 @@ export default function TabLayout() {
         options={{
           title: "Create Task",
           tabBarIcon: ({ color }) => (
-            <IconSymbol size={26} name="plus.circle.fill" color={color} />
+            <IconSymbol size={26} name="square.and.pencil" color={color} />
+          ),
+          headerRight: () => (
+            <Pressable onPress={toggleTheme} style={{ marginRight: 16 }}>
+              {theme === "light" ? (
+                <IconSymbol size={26} name="moon.fill" color={colors.text} />
+              ) : (
+                <IconSymbol size={26} name="sun.max.fill" color={colors.text} />
+              )}
+            </Pressable>
           ),
         }}
       />
     </Tabs>
   );
 }
+

@@ -1,12 +1,17 @@
 import { Stack } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import { ThemeProvider, useTheme } from "../app/theme/themes";
+import { Provider } from "react-redux";
+import { store } from "@/redux/store";
 
 export default function RootLayout() {
   return (
-    <ThemeProvider>
-      <InnerLayout />
-    </ThemeProvider>
+    <Provider store={store}>
+      <ThemeProvider>
+        <InnerLayout />
+      </ThemeProvider>
+    </Provider>
+
   );
 }
 
