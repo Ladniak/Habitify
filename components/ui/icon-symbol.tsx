@@ -15,6 +15,7 @@ const MAPPING = {
   'speedometer': 'speed',
   'plus.circle.fill': 'add-circle',
   'doc.text.fill': 'drafts',
+  'arrowshape.turn.up.left.fill': 'logout',
 } as IconMapping;
 
 export function IconSymbol({

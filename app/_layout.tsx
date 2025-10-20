@@ -1,8 +1,8 @@
-import { store } from "@/redux/store";
 import { Stack } from "expo-router";
-import { StatusBar } from "expo-status-bar";
 import { Provider } from "react-redux";
+import { store } from "@/redux/store";
 import { ThemeProvider, useTheme } from "../theme/themes";
+import { StatusBar } from "expo-status-bar";
 
 export default function RootLayout() {
   return (
@@ -11,7 +11,6 @@ export default function RootLayout() {
         <InnerLayout />
       </ThemeProvider>
     </Provider>
-
   );
 }
 
@@ -26,6 +25,8 @@ function InnerLayout() {
           headerTintColor: colors.text,
         }}
       >
+        {/* 🔹 маршрути */}
+        <Stack.Screen name="auth" options={{ headerShown: false }} />
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
         <Stack.Screen name="details/[id]" options={{ title: "Task Details" }} />
         <Stack.Screen name="edit/[id]" options={{ title: "Edit" }} />
@@ -34,3 +35,5 @@ function InnerLayout() {
     </>
   );
 }
+
+
