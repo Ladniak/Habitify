@@ -1,14 +1,14 @@
-import React, { useState } from "react";
-import { Alert, StyleSheet, View, Text, Platform } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
-import { useDispatch } from "react-redux";
-import { useRouter } from "expo-router";
 import { AppDispatch } from "@/redux/store";
 import { addTask } from "@/redux/tasksSlice";
-import { useTheme } from "../theme/themes";
-import Input from "../components/Input";
-import Button from "../components/Button";
 import { Picker } from "@react-native-picker/picker";
+import { useRouter } from "expo-router";
+import React, { useState } from "react";
+import { Alert, Platform, StyleSheet, Text, View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { useDispatch } from "react-redux";
+import { useTheme } from "../../theme/themes";
+import Button from "../components/Button";
+import Input from "../components/Input";
 
 export default function CreateTask() {
     const { colors } = useTheme();

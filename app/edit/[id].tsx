@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from "react";
-import { Alert, StyleSheet, View, Text, Platform } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
-import { useDispatch, useSelector } from "react-redux";
-import { useRouter, useLocalSearchParams } from "expo-router";
 import { AppDispatch, RootState } from "@/redux/store";
 import { fetchTaskById, updateTask } from "@/redux/tasksSlice";
-import { useTheme } from "../theme/themes";
-import Input from "../components/Input";
-import Button from "../components/Button";
 import { Picker } from "@react-native-picker/picker";
+import { useLocalSearchParams, useRouter } from "expo-router";
+import React, { useEffect, useState } from "react";
+import { Alert, Platform, StyleSheet, Text, View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { useDispatch, useSelector } from "react-redux";
+import { useTheme } from "../../theme/themes";
+import Button from "../components/Button";
+import Input from "../components/Input";
 
 export default function EditTask() {
     const { id } = useLocalSearchParams();

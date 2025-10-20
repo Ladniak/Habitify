@@ -1,15 +1,15 @@
-import { SafeAreaView } from "react-native-safe-area-context";
-import { View, Text, FlatList, StyleSheet, Platform } from "react-native";
-import { useEffect, useState, useMemo } from "react";
-import { Link, useRouter } from "expo-router";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchTasks } from "@/redux/tasksSlice";
-import { RootState, AppDispatch } from "@/redux/store";
-import Card from "../components/Card";
-import Button from "../components/Button";
-import { useTheme } from "../theme/themes";
 import { IconSymbol } from "@/components/ui/icon-symbol";
+import { AppDispatch, RootState } from "@/redux/store";
+import { fetchTasks } from "@/redux/tasksSlice";
 import { Picker } from "@react-native-picker/picker";
+import { Link, useRouter } from "expo-router";
+import { useEffect, useMemo, useState } from "react";
+import { FlatList, Platform, StyleSheet, Text, View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { useDispatch, useSelector } from "react-redux";
+import { useTheme } from "../../theme/themes";
+import Button from "../components/Button";
+import Card from "../components/Card";
 
 export default function HomeScreen() {
   const { colors } = useTheme();

@@ -1,9 +1,9 @@
+import { HapticTab } from "@/components/haptic-tab";
+import { IconSymbol } from "@/components/ui/icon-symbol";
 import { Tabs } from "expo-router";
 import React from "react";
 import { Pressable } from "react-native";
-import { HapticTab } from "@/components/haptic-tab";
-import { IconSymbol } from "@/components/ui/icon-symbol";
-import { useTheme } from "../theme/themes";
+import { useTheme } from "../../theme/themes";
 
 export default function TabLayout() {
   const { colors, toggleTheme, theme } = useTheme();

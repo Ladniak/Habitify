@@ -1,12 +1,12 @@
-import { useLocalSearchParams, useRouter } from "expo-router";
-import { Alert, StyleSheet, Text, View } from "react-native";
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useTheme } from "../theme/themes";
 import { IconSymbol } from "@/components/ui/icon-symbol";
+import { AppDispatch, RootState } from "@/redux/store";
+import { deleteTask, fetchTaskById, toggleTaskStatus } from "@/redux/tasksSlice";
+import { useLocalSearchParams, useRouter } from "expo-router";
+import { useEffect } from "react";
+import { Alert, StyleSheet, Text, View } from "react-native";
+import { useDispatch, useSelector } from "react-redux";
+import { useTheme } from "../../theme/themes";
 import Button from "../components/Button";
-import { fetchTaskById, toggleTaskStatus, deleteTask } from "@/redux/tasksSlice";
-import { RootState, AppDispatch } from "@/redux/store";
 
 export default function TaskDetails() {
     const { id } = useLocalSearchParams();

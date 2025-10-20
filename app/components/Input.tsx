@@ -1,5 +1,5 @@
 import { StyleSheet, TextInput } from "react-native";
-import { useTheme } from "../theme/themes";
+import { useTheme } from "../../theme/themes";
 
 export default function Input({ value, onChangeText, placeholder }: any) {
     const { colors } = useTheme();

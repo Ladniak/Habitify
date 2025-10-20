@@ -1,7 +1,6 @@
-import { Pressable, StyleSheet, Text } from "react-native";
-import { useTheme } from "../theme/themes";
-import { View } from "react-native";
 import { IconSymbol } from "@/components/ui/icon-symbol";
+import { Pressable, StyleSheet, Text, View } from "react-native";
+import { useTheme } from "../../theme/themes";
 
 export default function Button({ title, icon, onPress, color }: { title: string; icon?: string; onPress: () => void; color?: string }) {
     const { colors } = useTheme();
