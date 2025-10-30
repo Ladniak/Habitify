@@ -1,50 +1,59 @@
-# Welcome to your Expo app 👋
+Ось `README.md` для репозиторію **Habitify**, створений за наданим вами зразком:
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+````markdown
+# Habitify
 
-## Get started
+Веб-додаток для відстеження та управління щоденними звичками, що допомагає користувачам будувати стійкі рутини та досягати особистих цілей.
 
-1. Install dependencies
+## Features (Особливості)
 
-   ```bash
-   npm install
-   ```
+* Створення, редагування та видалення персоналізованих звичок.
+* Щоденне відстеження виконання звичок.
+* Відображення "ланцюжка" (streaks) та загального прогресу.
+* Зручний та мінімалістичний інтерфейс користувача.
 
-2. Start the app
+## Installation (Встановлення)
 
-   ```bash
-   npx expo start
-   ```
+Клонуйте репозиторій:
+```bash
+git clone [https://github.com/Ladniak/Habitify.git](https://github.com/Ladniak/Habitify.git)
+````
 
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
+Перейдіть до директорії проєкту:
 
 ```bash
-npm run reset-project
+cd Habitify
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+Відкрийте директорію проєкту:
 
-## Learn more
+```bash
+code .
+```
 
-To learn more about developing your project with Expo, look at the following resources:
+Встановіть залежності:
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+```bash
+npm install
+```
 
-## Join the community
+Запустіть сервер розробки:
 
-Join our community of developers creating universal apps.
+```bash
+npm run dev
+```
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+## Usage (Використання)
+
+1.  Відкрийте програму у вашому браузері (зазвичай на `http://localhost:3000` або іншому порту, вказаному у консолі).
+2.  Створіть нові звички та встановіть їхню періодичність.
+3.  Щодня відмічайте виконання звичок, щоб формувати стійкий "ланцюжок".
+
+## Author (Автор)
+
+**Serhii Ladniak**
+19 y.o., Frontend Developer
+GitHub: [Ladniak](https://www.google.com/search?q=https://github.com/Ladniak)
+
+```
+```
